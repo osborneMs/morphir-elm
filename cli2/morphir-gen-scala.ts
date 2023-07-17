@@ -3,7 +3,7 @@
 //NPM imports
 import * as fs from "fs";
 import path from 'path';
-import {Command} from 'commander'
+import { program } from 'commander'
 import cli = require('./cli')
 import * as util from 'util'
 
@@ -106,20 +106,23 @@ const gen = async (
     return Promise.all(writePromises.concat(deletePromises));
   };
   
-const program = new Command()
+ 
 program
-    .name('morphir scala-gen')
+    .name('morphir gen scala')
     .description('Generate scala code from Morphir IR')
+    // common options to all 
     .option('-i, --input <path>', 'Source location where the Morphir IR will be loaded from.', 'morphir-ir.json')
     .option('-o, --output <path>', 'Target location where the generated code will be saved.', './dist')
-    .option('-t, --target <type>', 'Language to Generate.', 'Scala')
-    .option('-e, --target-version <version>', 'Language version to Generate.', '2.11')
     .option('-c, --copy-deps', 'Copy the dependencies used by the generated code to the output path.', false)
     .option('-m, --limitToModules <comma.separated,list.of,module.names>', 'Limit the set of modules that will be included.', '')
-    .option('-s, --include-codecs <boolean>', 'Generate the scala codecs as well', false)
+    .option('-s, --include-codecs <boolean>', 'Generate the scala codecs as well', false)  
+    // custom to this command
+    .option('-t, --target <type>', 'Language to Generate.', 'Scala')
+    .option('-e, --target-version <version>', 'Language version to Generate.', '2.11')
     .option('--generate-test-generic', 'Generate generic test cases from morphir tests that can be used for testing', false)
     .option('--generate-test-scalatest', 'Generate runnable scalatest test cases', false)
     .parse(process.argv)
+    
 
 gen(program.opts().input, path.resolve(program.opts().output), program.opts())
     .then(() =>{

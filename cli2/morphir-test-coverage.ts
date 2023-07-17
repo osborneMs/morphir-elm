@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // NPM Imports
-import { Command } from "commander";
+import { program } from "commander";
 import * as fs from "fs";
 import * as path from "path";
 import * as util from "util";
@@ -9,12 +9,11 @@ import cli from "./cli";
 
 // logging
 require("log-timestamp");
+
 const fsWriteFile = util.promisify(fs.writeFile);
 
-const program = new Command();
 program
-    .name("morphir test-coverage")
-    .description("Generates report on number of branches in a Morphir IR value and TestCases covered")
+    .name("morphir test coverage")
     .option("-i, --ir <path>", "Source location where the Morphir IR will be loaded from.", "morphir-ir.json")
     .option("-t, --tests <path>", "Source location where the Morphir Test Json will be loaded from.", "morphir-tests.json")
     .option("-o, --output <path>", "Source location where the Morphir Test Coverage result will be ouput to.", ".")

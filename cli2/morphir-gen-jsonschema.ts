@@ -10,7 +10,7 @@ require('log-timestamp')
 
 const program = new Command
 program
-    .name('morphir json-schema-gen')
+    .name('morphir gen jsonschema')
     .description('Generate Json Schema from Morphir IR')
     .option('-i, --input <path>', 'Source location where the Morphir IR will be loaded from.', 'morphir-ir.json')
     .option('-o, --output <path>', 'Target location where the generated code will be saved.', './dist')

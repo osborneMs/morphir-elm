@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // NPM imports
-import { Command } from 'commander'
+import { program } from 'commander'
 
 import * as fs from 'fs'
 import * as util from 'util'
@@ -19,9 +19,8 @@ const worker = require('./../Morphir.Elm.Generator').Elm.Morphir.Elm.Generator.i
 require('log-timestamp')
 
 // Set up Commander
-const program = new Command()
 program
-	.name('morphir generate-test-data')
+	.name('morphir test data')
 	.description('Generate test data for Models (types) in a Morphir IR')
 	.option('-p, --project-dir <path>', 'Root directory of the project where morphir.json is located.', '.')
 	.option('-o, --output <path>', 'Target file location where the test data will be saved.', 'test-data.json')
